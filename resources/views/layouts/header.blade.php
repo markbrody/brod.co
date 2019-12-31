@@ -12,12 +12,12 @@
     </div>
     <div class="main-nav-component flex-fill col-12 col-lg-auto" style="z-index:1">
         <ul class="main-nav-menu mx-0">
-            <li>Other Projects:</li>
-            <li><a href="{{ url('/') }}">Blog Home</a></li>
-            <li><a target="_blank" href="https://asciify.me">Ascii Art</a></li>
-            <li><a target="_blank" href="https://googlyizer.com">Googly Eyes</a></li>
-            <li><a target="_blank" href="https://simpledns.net">Managed DNS</a></li>
-            <li><a target="_blank" href="https://sudoku.brod.co">Sudoku</a></li>
+            <li>Projects Directory:</li>
+            <li><a href="{{ url('/') }}">/home</a></li>
+            <li><a target="_blank" href="https://asciify.me">/ascii-art</a></li>
+            <li><a target="_blank" href="https://googlyizer.com">/googly-eyes</a></li>
+            <li><a target="_blank" href="https://simpledns.net">/managed-dns</a></li>
+            <li><a target="_blank" href="https://sudoku.brod.co">/sudoku</a></li>
         </ul>
     </div>
     <div class="main-nav-component d-none d-lg-block flex-shrink">

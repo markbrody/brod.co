@@ -57,7 +57,7 @@ class Article extends Model
     }
 
     public function getReadTimeAttribute() {
-        return ceil(str_word_count($this->markdown) / 200);
+        return ceil(str_word_count($this->markdown) / 180);
     }
 
     public function getUrlAttribute() {

@@ -22,5 +22,16 @@
     </div>
 </div>
 @endforeach
-
+<div class="row my-5">
+    <div class="col-12 text-right">
+        <button class="btn btn-outline-secondary mr-2">
+            <span class="mdi mdi-chevron-left"></span>
+            Newer
+        </button>
+        <button class="btn btn-outline-secondary">
+            Older
+            <span class="mdi mdi-chevron-right"></span>
+        </button>
+    </div>
+</div>
 @endsection

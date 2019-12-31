@@ -18,7 +18,7 @@ class Article extends Model
 {
     use SoftDeletes, Uuid;
 
-    protected $appends = ["created", "hero_url", "thumbnail_url"];
+    protected $appends = ["created", "hero_url", "thumbnail_url", "url", ];
 
     protected $fillable = ["headline", "subheading", "markdown", "user_id"];
 

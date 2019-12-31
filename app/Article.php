@@ -22,7 +22,8 @@ class Article extends Model
 
     protected $fillable = ["headline", "subheading", "markdown", "user_id"];
 
-    protected $hidden = ["user_id", "created_at", "updated_at", "deleted_at"];
+    protected $hidden = ["user_id", "created_at", "updated_at", "deleted_at",
+                         "pivot", ];
 
     protected $with = ["user"];
 
@@ -31,6 +32,10 @@ class Article extends Model
         self::saving(function($article) {
             $article->slug = Str::slug($article->headline, "-");
         });
+    }
+
+    public function tags() {
+        return $this->belongsToMany("App\Tag");
     }
 
     public function user() {
@@ -56,7 +61,7 @@ class Article extends Model
     }
 
     public function getUrlAttribute() {
-        return route("blog") . "/$this->slug";
+        return route("articles", $this->slug);
     }
 
     private function get_hero_extension() {

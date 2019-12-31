@@ -1,7 +1,7 @@
 @extends("layouts.main")
 
 @section("content")
-@foreach($articles as $article)
+@forelse($articles as $article)
 <div class="article-item card shadow-sm mx-auto mb-4">
     @if($article->hero_url)
     <a href="{{ $article->url }}"><img class="w-100" src="{{ $article->hero_url }}" alt="{{ $article->headline }}"></a>
@@ -21,17 +21,7 @@
         </div>
     </div>
 </div>
-@endforeach
-<div class="row my-5">
-    <div class="col-12 text-right">
-        <button class="btn btn-outline-secondary mr-2">
-            <span class="mdi mdi-chevron-left"></span>
-            Newer
-        </button>
-        <button class="btn btn-outline-secondary">
-            Older
-            <span class="mdi mdi-chevron-right"></span>
-        </button>
-    </div>
-</div>
+@empty
+<h3 class="mt-4">No results found</h3>
+@endforelse
 @endsection

@@ -16,10 +16,11 @@ Route::group(["middleware" => ["auth", ]], function() {
 /**
   * Guest routes
   */
-Route::get("/", "ArticlesController@index");
-Route::get("articles", "ArticlesController@index")->name("blog");
-Route::get("articles/{slug}", "ArticlesController@show");
+Route::get("/", "ArticlesController@index")->name("index");
+Route::get("articles", "ArticlesController@index");
+Route::get("articles/{slug}", "ArticlesController@show")->name("articles");
 Route::get("calendar/{year?}/{month?}", "CalendarController@index")->name("calendar");
+Route::get("page/{page}", "ArticlesController@index")->name("page");
 Route::get("robots.txt", "RobotsController@index");
 Route::get("sitemap.xml", "SitemapController@index");
 

@@ -60,7 +60,7 @@ class SitemapController extends Controller
         });
     }
 
-    private function get_blog() {
+    private function get_articles() {
         foreach (Article::where("is_published", 1)->get() as $article)
             yield (object) [
                 "id" => $article->slug,
@@ -71,7 +71,7 @@ class SitemapController extends Controller
     private function get_lastmod($uri) {
         if ($uri == "/")
             $uri = "index";
-        elseif ($uri == "blog")
+        elseif ($uri == "articles")
             $uri = "articles_index";
         $blade = str_replace("-", "_", $uri);
         $filename = resource_path("views/$blade.blade.php");

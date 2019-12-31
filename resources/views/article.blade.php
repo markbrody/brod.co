@@ -11,10 +11,12 @@
         </span>
     </small>
     <br><br>
+    @if($article->tags->count() > 0)
     Tags:
-    @foreach(["linux", "fedora", "thinkpad"] as $tag)
-        <span class="badge badge-secondary ml-1">{{ $tag }}</span>
+    @foreach($article->tags as $tag)
+        <span class="badge badge-secondary ml-1">{{ $tag->name }}</span>
     @endforeach
+    @endif
 </div>
 @if($article->hero_url)
 <div class="jumbotron jumbotron-fluid p-0">

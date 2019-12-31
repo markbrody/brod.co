@@ -5,6 +5,7 @@
         <loc>{{ $url->loc }}</loc>
         <lastmod>{{ $url->lastmod }}</lastmod>
         <priority>{{ $url->priority }}</priority>
+        <changefreq>{{ $url->changefreq }}</changefreq>
     </url>
 @endforeach
 </urlset>

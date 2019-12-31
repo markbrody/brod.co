@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Images\Hero;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
+use Storage;
 
 class SitemapController extends Controller
 {
@@ -16,24 +18,25 @@ class SitemapController extends Controller
     public function __construct() {
         $this->routes = collect(app()->routes->getRoutes());
         $this->excludes = [
-            // "ajax",
-            // "biscolab",
-            // "images",
-            // "logout",
-            // "robots\.txt",
-            // "sitemap\.xml",
+            "ajax",
+            "calendar",
+            "images\/thumbnails",
+            "login",
+            "logout",
+            "_ignition"
         ];
     }
 
     public function index() {
         $urls = [];
         $this->eligible_routes()->each(function($route) use (&$urls) {
-            if (preg_match("/(\w+)\/\{\w+\}$/", $route->uri, $match)) {
+            if (preg_match("/(\w+).*\/\{[\w{}.]+\}$/", $route->uri, $match)) {
                 $method = "get_$match[1]";
                 foreach ($this->{$method}() as $page) {
                     $urls[] = (object) [
-                        "loc" => url(preg_replace("/\{\w+\}$/", $page->id, $route->uri)),
+                        "loc" => $page->url,
                         "lastmod" => $page->updated_at->format(DateTime::ISO8601),
+                        "changefreq" => $page->changefreq,
                         "priority" => 0.8,
                     ];
                 }
@@ -42,7 +45,8 @@ class SitemapController extends Controller
                 $urls[] = (object) [
                     "loc" => url($route->uri),
                     "lastmod" => $this->get_lastmod($route->uri),
-                    "priority" => 1,
+                    "changefreq" => "weekly",
+                    "priority" => 0.5,
                 ];
         });
         return response(view("sitemap", [
@@ -63,8 +67,34 @@ class SitemapController extends Controller
     private function get_articles() {
         foreach (Article::where("is_published", 1)->get() as $article)
             yield (object) [
-                "id" => $article->slug,
+                "url" => $article->url,
                 "updated_at" => $article->updated_at,
+                "changefreq" => "weekly",
+            ];
+    }
+
+    private function get_images() {
+        foreach (Storage::files(Hero::IMAGE_DIRECTORY) as $image) {
+            $updated_at = Storage::lastModified($image);
+            yield (object) [
+                "url" => asset($image),
+                "updated_at" => Carbon::createFromTimestamp($updated_at),
+                "changefreq" => "monthly",
+            ];
+        }
+    }
+
+    private function get_page() {
+        $articles = Article::select("id", "updated_at")
+                           ->where("is_published", true)
+                           ->orderBy("updated_at", "desc")
+                           ->get();
+
+        for ($i=1; $i<=ceil($articles->count() / 5); $i++)
+            yield (object) [
+                "url" => route("page", $i),
+                "updated_at" => $articles[0]->updated_at,
+                "changefreq" => "daily",
             ];
     }
 

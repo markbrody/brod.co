@@ -27,4 +27,5 @@ brod.co
 @include("layouts.left_nav")
 @yield("modal")
 @yield("scripts")
+{!! App\Disqus::counter() !!}
 @endsection

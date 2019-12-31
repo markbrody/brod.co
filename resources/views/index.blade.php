@@ -13,7 +13,7 @@
                 <div class="text-muted mb-1">
                     <span class="mr-2">Published {{ $article->created }}</span> &bull;
                     <span class="mx-2">{{ $article->read_time }} min read</span> &bull;
-                    <span class="ml-2"><a href="#">8 comments</a></span>
+                    <span class="ml-2"><a class="text-lowercase" href="{{ $article->url }}#disqus_thread" data-disqus-identifier="{{ $article->id }}">0 comments</a></span>
                 </div>
                 <div class="mb-2">{{ $article->description }}</div>
                 <a href='{{ $article->url }}'>Read More &rarr;</a>

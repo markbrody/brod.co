@@ -45,22 +45,5 @@
 @endsection
 
 @section("scripts")
-<script>
-    var disqus_config = function() {
-        this.page.url = "{{ $article->url }}"
-        this.page.identifier = "{{ $article->id }}";
-    };
-    (function() {
-        var d = document, s = d.createElement('script');
-        s.src = 'https://brod-co.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<script id="dsq-count-scr" src="//brod-co.disqus.com/count.js" async></script>
-<script>
-DISQUSWIDGETS.getCount({reset: true});
-</script>
-                            
-
+{!! (new App\Disqus($article))->comments() !!}
 @endsection

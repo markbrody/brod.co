@@ -1,0 +1,44 @@
+.col {
+    width: 14.14%;
+}
+
+.calendar-day {
+    height: 13vh;
+}
+
+.calendar-label:nth-child(n+2),
+.calendar-day:nth-child(n+2) {
+    margin-left: -1px;
+}
+
+.progress {
+    height: 3vh;
+}
+
+.progress-bar {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: .65rem;
+}
+
+@media (min-width: 992px) {
+    .calendar-day {
+        height: 14.5vh;
+    }
+
+    .progress-bar {
+        font-size: 1rem;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #323335;
+        color: #cfe0df;
+    }
+
+    .bg-light,
+    .btn-light {
+        background-color: #222!important;
+        color: #f8f9fa!important;
+    }
+}

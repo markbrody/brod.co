@@ -1,31 +1,13 @@
 @extends("layouts.base")
 
-@section("template")
+@section("head")
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
-<style>
-.col {
-    width: 14.14%;
-}
-.calendar-day {
-    height: 15vh;
-}
-.calendar-label:nth-child(n+2),
-.calendar-day:nth-child(n+2) {
-    margin-left: -1px;
-}
-.progress {
-    height: 3vh;
-}
-.progress-bar {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: .65rem;
-}
-@media (min-width: 992px) {
-    .progress-bar {
-        font-size: 1rem;
-    }
-}
-</style>
+<link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
+<link rel="icon" href="{{ asset('images/calendar/favicon.ico') }}" sizes="16x16 32x32 48x48 64x64" type="image/vnd.microsoft.icon">
+<link rel="apple-touch-icon-precomposed" href="{{ asset('images/calendar/apple-touch-icon.png' ) }}" />
+@endsection
+
+@section("template")
 <div class="container">
     <div class="row mb-4">
         <div class="col-12 d-flex">

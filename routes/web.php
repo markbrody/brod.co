@@ -1,0 +1,42 @@
+<?php
+
+/**
+  * Routes that require login
+  */
+Route::group(["middleware" => ["auth", ]], function() {
+    Route::get("admin", "AdminController@index")->name("admin");
+    Route::get("admin/{id}", "AdminController@show");
+    Route::post("admin/{id}", "AdminController@update");
+    Route::get("preview/{slug}", "ArticlesController@preview");
+    Route::group(["prefix" => "ajax"], function() {
+        Route::put("hero/{id}", "HeroController@update");
+    });
+});
+
+/**
+  * Guest routes
+  */
+Route::get("/", "ArticlesController@index");
+Route::get("articles", "ArticlesController@index")->name("blog");
+Route::get("articles/{slug}", "ArticlesController@show");
+Route::get("calendar/{year?}/{month?}", "CalendarController@index")->name("calendar");
+Route::get("robots.txt", "RobotsController@index");
+Route::get("sitemap.xml", "SitemapController@index");
+
+Route::group(["prefix" => "ajax"], function() {
+    Route::get("search", "SearchController@index");
+});
+/**
+ * Dynamically built images
+ */
+Route::group(["prefix" => "images"], function() {
+    Route::get("heroes/{slug}.{extension}", "ImagesController@hero");
+    Route::get("thumbnails/{slug}.{extension}", "ImagesController@thumbnail");
+});
+
+/**
+ * Auth routes
+ */
+Route::get("login", "Auth\LoginController@showLoginForm")->name("login");
+Route::post("login", "Auth\LoginController@login");
+Route::get("logout", "Auth\LoginController@logout")->name("logout");

@@ -23,7 +23,9 @@ class SitemapController extends Controller
             "images\/thumbnails",
             "login",
             "logout",
-            "_ignition"
+            "_ignition",
+            "robots\.txt",
+            "sitemap\.xml",
         ];
     }
 

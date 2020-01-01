@@ -32,7 +32,7 @@ brod.co
         </div>
         @endif
         <footer class="text-center mt-5">
-            <small class="text-muted">Copyright &copy; 2017-{{ date("Y") }} {{ config("app.name") }}</small>
+            <small class="text-muted">Copyright &copy; 2017-{{ date("Y") }} &nbsp; {{ config("app.name") }}</small>
         </footer>
     </div>
     <div id="search-results" class="list-group search-results rounded shadow" style="display:none"></div>

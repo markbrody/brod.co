@@ -17,6 +17,7 @@
     </head>
     <body>
         @yield("template")
+        {!! GoogleAnalytics::show() !!}
     </body>
 </html>
 

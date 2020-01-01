@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App;
 use App\Article;
 
 class Disqus
@@ -13,7 +14,9 @@ class Disqus
     }
 
     public function comments() {
-        return view("disqus", ["article" => $this->article, ]);
+        if (App::environment() != "local")
+            return view("disqus", ["article" => $this->article, ]);
+        return;
     }
 
     public static function counter() {

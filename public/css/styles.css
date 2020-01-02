@@ -251,6 +251,8 @@ ul.main-nav-menu li {
     border-left: 3px solid #ff8c00;
     margin-bottom: 0;
     padding: 5px 10px;
+    white-space: nowrap;
+    overflow: scroll;
 }
 
 /**

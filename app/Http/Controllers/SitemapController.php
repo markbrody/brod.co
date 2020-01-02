@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Images\Hero;
+use App\Tag;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
@@ -96,6 +97,16 @@ class SitemapController extends Controller
             yield (object) [
                 "url" => route("page", $i),
                 "updated_at" => $articles[0]->updated_at,
+                "changefreq" => "daily",
+            ];
+    }
+
+    private function get_tags() {
+        $tags = Tag::all();
+        foreach ($tags as $tag)
+            yield (object) [
+                "url" => route("tags", $tag->name),
+                "updated_at" => $tag->updated_at,
                 "changefreq" => "daily",
             ];
     }

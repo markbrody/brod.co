@@ -4,7 +4,9 @@
 @forelse($articles as $article)
 <div class="article-item card shadow-sm mx-auto mb-4">
     @if($article->hero_url)
-    <a href="{{ $article->url }}"><img class="w-100" src="{{ $article->hero_url }}" alt="{{ $article->headline }}"></a>
+    <div class="w-100 p-1">
+        <a href="{{ $article->url }}"><img class="w-100" src="{{ $article->hero_url }}" alt="{{ $article->headline }}"></a>
+    </div>
     @endif
     <div class="card-body">
         <div class="row">

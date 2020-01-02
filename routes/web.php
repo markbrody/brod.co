@@ -23,6 +23,7 @@ Route::get("calendar/{year?}/{month?}", "CalendarController@index")->name("calen
 Route::get("page/{page}", "ArticlesController@index")->name("page");
 Route::get("robots.txt", "RobotsController@index");
 Route::get("sitemap.xml", "SitemapController@index");
+Route::get("tags/{name}", "TagsController@index")->name("tags");
 
 Route::group(["prefix" => "ajax"], function() {
     Route::get("search", "SearchController@index");

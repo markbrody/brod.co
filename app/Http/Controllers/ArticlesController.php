@@ -25,15 +25,19 @@ class ArticlesController extends Controller
         if ($is_published)
             $article = $article->where("is_published", 1);
         $article = $article->firstOrFail();
+
+        $open_graph = (object) [
+            "title" => $article->headline,
+            "url" => route("articles", $article->slug),
+            "description" => $article->description,
+        ];
+        if ($article->hero_url)
+            $open_graph->image = $article->hero_url;
+
         return view("article", [
             "article" => $article,
             "nav_links" => $this->article_links($article),
-            "open_graph" => (object) [
-                "title" => $article->headline,
-                "url" => route("articles", $article->slug),
-                "image" => $article->thumbnail_url,
-                "description" => $article->description,
-            ],
+            "open_graph" => $open_graph,
         ]);
     }
 

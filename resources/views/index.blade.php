@@ -1,5 +1,11 @@
 @extends("layouts.main")
 
+@if(isset($tag_name))
+@section("page_title")
+<h4 class="mb-3">Articles tagged with: <strong>{{ $tag_name }}</strong></h4>
+@endsection
+@endif
+
 @section("content")
 @forelse($articles as $article)
 <div class="article-item card shadow-sm mx-auto mb-4">

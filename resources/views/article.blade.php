@@ -14,7 +14,7 @@
     @if($article->tags->count() > 0)
     Tags:
     @foreach($article->tags as $tag)
-        <span class="badge badge-secondary ml-1">{{ $tag->name }}</span>
+        <a class="badge badge-secondary ml-1" href="{{ route('tags', $tag->name) }}">{{ $tag->name }}</a>
     @endforeach
     @endif
 </div>

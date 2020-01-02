@@ -8,6 +8,7 @@ brod.co
 <div class="main-container container-fluid pb-4">
     <div class="container">
         @include("layouts.header")
+        @yield("page_title")
         @yield("content")
         @if(isset($nav_links))
         <div class="row border-top my-5">

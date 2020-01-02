@@ -49,24 +49,16 @@
                         <div id="add-tag-button-container" class="position-absolute p-3" style="top:0;right:0;display:none">
                             <span id="add-tag-button" class="mdi mdi-plus-circle-outline text-muted"></span>
                         </div>
-{{--
-                        <ul class="list-group">
-                            <li class="list-group-item list-group-item-action">a</li>
-                            <li class="list-group-item list-group-item-action">b</li>
-                            <li class="list-group-item list-group-item-action">c</li>
-                            <li class="list-group-item list-group-item-action">d</li>
-                        </ul>
---}}
+                        <ul id="tag-search-results" class="list-group" style="display:none;padding-top:50px"></ul>
                     </div>
                 </div>
             </div>
             <div class="row mb-5">
-                <div class="col-12">
+                <div id="tags-container" class="col-12">
                 @foreach ($article->tags as $tag)
-                <button type="button" class="btn btn-sm btn-light m-1 country-button" data-id="{{ $tag->id }}">
+                <button type="button" class="btn btn-sm btn-light m-1">
                     <span class="mx-1">{{ $tag->name }}</span>
-                    <span class="mdi mdi-close delete-tag"></span>
-                    <input type="hidden" name="tags[]" value="{{ $tag->id }}">
+                    <span class="mdi mdi-close delete-tag" data-id="{{ $tag->id }}"></span>
                 </button>
                 @endforeach
                 </div>
@@ -101,6 +93,7 @@
 <script src="{{ asset('js/drag_and_drop.js') }}"></script>
 <script src="{{ asset('js/progress_bar.js') }}"></script>
 <script>
+    var article_id = "{{ $article->id }}";
     var upload_url = '{{ url("ajax/hero/$article->id") }}';
     var csrf = $("#csrf-token-input").val();
     var progressbar_options = {
@@ -121,12 +114,20 @@
                 type: "GET",
                 url: "/api/tags?search=" + $(this).val(),
                 success: function(response) {
-                    console.log(response);
                     if (response.length == 0) {
                         $("#add-tag-button-container").show();
                     }
                     else {
                         $("#add-tag-button-container").hide();
+                        $("#tag-search-results").empty();
+                        $("#tag-search-results").show();
+                        for (var i=0; i<response.length; i++) {
+                            var html = '<li class="tag-search-result list-group-item list-group-item-action" '
+                                     + 'data-id="' + response[i].id + '" '
+                                     + 'data-name="' + response[i].name + '">' + response[i].name + '</li>';
+                            $("#tag-search-results").append(html);
+                            
+                        }
                     }
                 }
             });
@@ -141,13 +142,65 @@
                     name: $("#tags-input").val(),
                 },
                 success: function(response) {
-                    alert(response.id);
-                    // $.ajax_api({
-                    //     type:
-                    // });
+                    var tag = {
+                        id: response.id,
+                        name: response.name,
+                    };
+                    $.ajax_api({
+                        type: "POST",
+                        url: "/api/articles/" + article_id + "/tags",
+                        data: {
+                            id: tag.id,
+                        },
+                        success: function() {
+                            var html = '<button type="button" class="btn btn-sm btn-light m-1">'
+                                     + '<span class="mx-1">' + tag.name + '</span>'
+                                     + '<span class="mdi mdi-close delete-tag" data-id="' + tag.id + '"></span>'
+                                     + '</button>';
+                            $("#tags-container").append(html);
+                            $("#tags-input").val("");
+                            $("#add-tag-button-container").hide();
+                        },
+                    });
                 },
             });
         }
+    });
+
+    $(document).on("click", ".tag-search-result", function() {
+        var tag = {
+            id: $(this).data("id"),
+            name: $(this).data("name"),
+        };
+        $.ajax_api({
+            type: "POST",
+            url: "/api/articles/" + article_id + "/tags",
+            data: {
+                id: tag.id,
+            },
+            success: function() {
+                var html = '<button type="button" class="btn btn-sm btn-light m-1">'
+                         + '<span class="mx-1">' + tag.name + '</span>'
+                         + '<span class="mdi mdi-close delete-tag" data-id="' + tag.id + '"></span>'
+                         + '</button>';
+                $("#tags-container").append(html);
+                $("#tags-input").val("");
+                $("#tag-search-results").empty();
+                $("#tag-search-results").hide();
+            },
+        });
+    });
+
+    $(document).on("click", ".delete-tag", function() {
+        var self = $(this);
+        if (confirm("Do you want to delete this tag?"))
+            $.ajax_api({
+                url: "/api/articles/" + article_id + "/tags/" + $(this).data("id"),
+                type: "DELETE",
+                success: function(response) {
+                    self.closest(".btn").remove();
+                },
+            });
     });
 </script>
 @endsection

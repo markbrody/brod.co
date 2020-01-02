@@ -26,6 +26,8 @@ class TagsController extends Controller
     }
 
     public function destroy(int $id) {
-        return json_encode(["success" => Tag::destroy($id)]);
+        $tag = Tag::findOrFail($id);
+        $tag->articles()->detach();
+        return json_encode(["success" => $tag->delete()]);
     }
 }

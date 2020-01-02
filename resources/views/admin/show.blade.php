@@ -109,6 +109,7 @@
     });
 
     $("#tags-input").on("keyup", function() {
+        $("#tag-search-results").empty();
         if ($(this).val().length > 1)
             $.ajax_api({
                 type: "GET",
@@ -119,7 +120,6 @@
                     }
                     else {
                         $("#add-tag-button-container").hide();
-                        $("#tag-search-results").empty();
                         $("#tag-search-results").show();
                         for (var i=0; i<response.length; i++) {
                             var html = '<li class="tag-search-result list-group-item list-group-item-action" '

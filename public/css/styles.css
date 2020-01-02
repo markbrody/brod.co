@@ -252,7 +252,7 @@ ul.main-nav-menu li {
     margin-bottom: 0;
     padding: 5px 10px;
     white-space: nowrap;
-    overflow: scroll;
+    overflow: hidden;
 }
 
 /**

@@ -53,7 +53,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row mb-5">
+            <div class="row mb-5" style="z-index:0">
                 <div id="tags-container" class="col-12">
                 @foreach ($article->tags as $tag)
                 <button type="button" class="btn btn-sm btn-light m-1">
@@ -124,7 +124,8 @@
                         for (var i=0; i<response.length; i++) {
                             var html = '<li class="tag-search-result list-group-item list-group-item-action" '
                                      + 'data-id="' + response[i].id + '" '
-                                     + 'data-name="' + response[i].name + '">' + response[i].name + '</li>';
+                                     + 'data-name="' + response[i].name + '" '
+                                     + 'style="z-index:1">' + response[i].name + '</li>';
                             $("#tag-search-results").append(html);
                             
                         }

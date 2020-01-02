@@ -16,9 +16,9 @@ class Hero extends Image
 
     const THUMBNAIL_DIRECTORY = "images/thumbnails/";
 
-    const THUMBNAIL_WIDTH = 240;
+    const THUMBNAIL_WIDTH = 260;
 
-    const THUMBNAIL_HEIGHT = 80;
+    const THUMBNAIL_HEIGHT = 65;
 
     private $id;
 

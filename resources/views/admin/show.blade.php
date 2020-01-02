@@ -38,28 +38,51 @@
         </div>
     </div>
     <div class="form-row mt-2">
-        <div id="image-upload-target" class="col-md-7 bg-white rounded" style="z-index:20;">
-            <label for="">Image (recommended 1250x650)</label>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-12">
+                    <label for="tags-input">Tags</label>
+                    <div class="position-relative" style="height:60px">
+                        <div class="position-absolute w-100">
+                            <input id="tags-input" class="form-control form-control-lg" style="top:0;left:0" type="text" placeholder="Search tags">
+                        </div>
+                        <div id="add-tag-button-container" class="position-absolute p-3" style="top:0;right:0;display:none">
+                            <span id="add-tag-button" class="mdi mdi-plus-circle-outline text-muted"></span>
+                        </div>
+{{--
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-action">a</li>
+                            <li class="list-group-item list-group-item-action">b</li>
+                            <li class="list-group-item list-group-item-action">c</li>
+                            <li class="list-group-item list-group-item-action">d</li>
+                        </ul>
+--}}
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-12">
+                @foreach ($article->tags as $tag)
+                <button type="button" class="btn btn-sm btn-light m-1 country-button" data-id="{{ $tag->id }}">
+                    <span class="mx-1">{{ $tag->name }}</span>
+                    <span class="mdi mdi-close delete-tag"></span>
+                    <input type="hidden" name="tags[]" value="{{ $tag->id }}">
+                </button>
+                @endforeach
+                </div>
+            </div>
+        </div>
+        <div id="image-upload-target" class="col-md-6 bg-white rounded" style="z-index:20;">
+            <label for="">Image (recommended 1200x400)</label>
             <div style="position:relative;background-color:#fff;border-style:dashed!important" class="text-center mr-4 mb-3 ml-4 pt-3 pb-2 border">
                 <input type="file" name="image" id="hidden-file-input" class="hidden-file-input">
-                <div id="thumbnail-container" style="position:relative;width:250px;height:130px;margin:auto;cursor:pointer;">
-                    <img style="width:250px;height:130px" class="hero-thumbnail bg-light border" id="image-upload-thumbnail" src="{{ $article->thumbnail_url }}">
+                <div id="thumbnail-container" style="position:relative;width:260px;height:65px;margin:auto;cursor:pointer;">
+                    <img style="width:260px;height:65px" class="hero-thumbnail bg-light border" id="image-upload-thumbnail" src="{{ $article->thumbnail_url }}">
                     <div id="image-upload-label" class="image-upload-label" style="display:none">Upload New</div>
                 </div>
                 <div style="width:250px;height:2px;margin:auto" id="progressbar-container" class="progress mt-2 bg-white">
                     <div id="progress-bar" class="progress-bar bg-success" role="progressbar" style="width:0%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-5">
-            <label for="">Visibility</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="is_published" id="is-published-1" value="1" {{ $article->is_published ? "checked" : "" }}>
-                <label class="form-check-label" for="is-published-1">Published</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="is_published" id="is-published-0" value="0" {{ $article->is_published ? "" : "checked" }}>
-                <label class="form-check-label" for="is-published-0">Unpublished</label>
             </div>
         </div>
     </div>
@@ -90,6 +113,41 @@
     let progress_bar = new ProgressBar(progressbar_options);
     $("#thumbnail-container").on("mouseover mouseout", function() {
         $("#image-upload-label").toggle();
+    });
+
+    $("#tags-input").on("keyup", function() {
+        if ($(this).val().length > 1)
+            $.ajax_api({
+                type: "GET",
+                url: "/api/tags?search=" + $(this).val(),
+                success: function(response) {
+                    console.log(response);
+                    if (response.length == 0) {
+                        $("#add-tag-button-container").show();
+                    }
+                    else {
+                        $("#add-tag-button-container").hide();
+                    }
+                }
+            });
+    });
+
+    $("#add-tag-button").on("click", function() {
+        if ($("#tags-input").val().length > 1) {
+            $.ajax_api({
+                type: "POST",
+                url: "/api/tags",
+                data: {
+                    name: $("#tags-input").val(),
+                },
+                success: function(response) {
+                    alert(response.id);
+                    // $.ajax_api({
+                    //     type:
+                    // });
+                },
+            });
+        }
     });
 </script>
 @endsection

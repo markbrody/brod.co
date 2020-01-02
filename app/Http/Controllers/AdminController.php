@@ -21,12 +21,10 @@ class AdminController extends Controller
             "headline" => "bail|required",
             "subheading" => "nullable",
             "markdown" => "bail|required",
-            "is_published" => "required|boolean",
         ]);
         $article->headline = $valid['headline'];
         $article->subheading = $valid['subheading'];
         $article->markdown = $valid['markdown'];
-        $article->is_published = $valid['is_published'];
         $article->save();
         return $this->show($article->id);
     }

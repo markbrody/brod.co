@@ -2,9 +2,7 @@
 
 namespace App;
 
-use App\AmazonAds;
 use Parsedown;
-use SimpleXMLElement;
 
 class Markdown extends Parsedown
 {
@@ -13,34 +11,20 @@ class Markdown extends Parsedown
     }
 
     public function html($markdown) {
-        $amazon_ads = [];
-        $pattern = "/<amazon\s*(.+)?>/i";
-        preg_match_all($pattern, $markdown, $match);
-        if ($match) {
-            foreach ($match[0] as $index => $tag) {
-                $markdown = str_replace($tag, "AMAZONADS_PLACEHOLDER_$index", $markdown);
-                $xml_element = new SimpleXMLElement(preg_replace("/([^\/])>$/", "$1/>", $tag));
-                $amazon_ads[$index] = $this->generate_amazon_ads($xml_element);
+        $filenames = [];
+        preg_match_all("/^file(name)?=([\w\/.-]+)/m", $markdown, $file_match);
+        if ($file_match) {
+            foreach($file_match[0] as $i => $filename) {
+                $markdown = str_replace($filename, "FILENAME_$i", $markdown);
+                $filenames[$i] = $file_match[2][$i];
             }
         }
         $html = $this->setSafeMode(true)->text($markdown);
-        foreach ($amazon_ads as $index => $ad)
-            $html = str_replace("<p>AMAZONADS_PLACEHOLDER_$index</p>", $ad, $html);
-        $html = str_replace("<a href", "<a target=\"_blank\" href", $html);
-
+        foreach ($filenames as $i => $filename) {
+            $title = " class='filename'>File: $filename";
+            $html = str_replace(">FILENAME_$i", $title, $html);
+        }
         return $html;
-    }
-
-    private function generate_amazon_ads(SimpleXMLElement $xml_element) {
-        $vars = [];
-        foreach ($xml_element->attributes() as $key => $value)
-            $vars[$key] = $value;
-        $amazon_ads = new AmazonAds($vars);
-        // $display_class = $display_mobile ? "" : " d-none d-md-block";
-        $display_class = "";
-        return '<div class="rol"><div class="col-12' . $display_class . '">'
-            . $amazon_ads->smart()->render()
-            . '</div></div>';
     }
 
 }

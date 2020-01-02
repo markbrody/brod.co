@@ -243,6 +243,16 @@ ul.main-nav-menu li {
     padding: 5px 15px;
 }
 
+.article-container .filename {
+    font-family: monospace;
+    background-color: #f8f9fa;
+    border-top: 1px solid #395570;
+    border-right: 1px solid #395570;
+    border-left: 3px solid #ff8c00;
+    margin-bottom: 0;
+    padding: 5px 10px;
+}
+
 /**
  * Material Design Icons
  */

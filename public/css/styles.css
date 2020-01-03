@@ -225,11 +225,25 @@ ul.main-nav-menu li {
     color: #395570;
 }
 
+.article-container > h1:not(:first-child),
+.article-container > h2:not(:first-child),
+.article-container > h3:not(:first-child),
+.article-container > h4:not(:first-child) {
+    margin-top: 3rem;
+}
+
+.article-container em {
+    font-family: monospace;
+    font-style: normal;
+    font-size: 1.1rem;
+    color: #ee7c00;
+    background-color: #f8f9fa;
+}
+
 .article-container > pre {
     color: #efefef;
     background-color: #395570;
-    border-left: 3px solid #007bff;
-    border-left: 3px solid #ff8c00;
+    border-left: 3px solid #ee7c00;
     padding: 15px;
 }
 
@@ -248,7 +262,7 @@ ul.main-nav-menu li {
     background-color: #f8f9fa;
     border-top: 1px solid #395570;
     border-right: 1px solid #395570;
-    border-left: 3px solid #ff8c00;
+    border-left: 3px solid #ee7c00;
     margin-bottom: 0;
     padding: 5px 10px;
     white-space: nowrap;

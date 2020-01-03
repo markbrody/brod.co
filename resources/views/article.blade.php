@@ -36,7 +36,7 @@
 @endif
 <div class="container border-top">
     <div class="row">
-        <div class="col pt-4 article-container">
+        <div class="col article-container">
             {{ $article->html }}
         </div>
     </div>

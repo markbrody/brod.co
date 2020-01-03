@@ -21,8 +21,8 @@ class Markdown extends Parsedown
         }
         $html = $this->setSafeMode(true)->text($markdown);
         foreach ($filenames as $i => $filename) {
-            $title = " class='filename'>File: $filename";
-            $html = str_replace(">FILENAME_$i", $title, $html);
+            $title = " class='filename'>File: $filename<";
+            $html = str_replace(">FILENAME_$i<", $title, $html);
         }
         return $html;
     }

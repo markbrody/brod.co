@@ -1,6 +1,14 @@
 @extends("layouts.base")
 
 @section("head")
+@if (isset($articles))
+    @foreach($articles as $prefetch)
+    @if($prefetch->hero_url)
+    <link rel="prefetch" href="{{ $prefetch->hero_url }}">
+    @endif
+    @endforeach
+@endif
+
 <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('images/favicon/apple-icon-57x57.png') }}">
 <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('images/favicon/apple-icon-60x60.png') }}">
 <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('images/favicon/apple-icon-72x72.png') }}">

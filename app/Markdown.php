@@ -12,7 +12,7 @@ class Markdown extends Parsedown
 
     public function html($markdown) {
         $filenames = [];
-        preg_match_all("/^file(name)?=([\w\/.-]+)/m", $markdown, $file_match);
+        preg_match_all("/^file(name)?=([\w\/.*-]+)/m", $markdown, $file_match);
         if ($file_match) {
             foreach($file_match[0] as $i => $filename) {
                 $markdown = str_replace($filename, "FILENAME_$i", $markdown);

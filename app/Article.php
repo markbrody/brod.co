@@ -51,8 +51,9 @@ class Article extends Model
     }
 
     public function getDescriptionAttribute() {
-        $markdown = strstr(str_replace("\r", "", $this->markdown), "\n", true);
-        $markdown = preg_replace("/^[\W]+/m", "", $this->markdown);
+        $markdown = preg_replace("/^#.+$/m", "", $this->markdown);
+        $markdown = preg_replace("/( _)([^_]+)(_ )/", " $2 ", $markdown);
+        $markdown = preg_replace("/^[\W]+/m", "", $markdown);
         return preg_replace("/\s[^\s]+$/", "", substr($markdown, 0, 512)) . "…";
     }
 

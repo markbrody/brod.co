@@ -54,7 +54,7 @@ class SitemapController extends Controller
         });
         return response(view("sitemap", [
             "urls" => $urls,
-        ]))->header("Content-Type", "text/plain");
+        ]))->header("Content-Type", "application/xml");
     }
 
     private function eligible_routes() {

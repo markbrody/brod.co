@@ -21,6 +21,7 @@ class SitemapController extends Controller
         $this->excludes = [
             "ajax",
             "calendar",
+            "images\/heroes",
             "images\/thumbnails",
             "login",
             "logout",
@@ -76,16 +77,19 @@ class SitemapController extends Controller
             ];
     }
 
-    private function get_images() {
-        foreach (Storage::files(Hero::IMAGE_DIRECTORY) as $image) {
-            $updated_at = Storage::lastModified($image);
-            yield (object) [
-                "url" => asset($image),
-                "updated_at" => Carbon::createFromTimestamp($updated_at),
-                "changefreq" => "monthly",
-            ];
-        }
-    }
+    /**
+     * This involves looking up corresponding articles and inefficient
+     */
+    // private function get_images() {
+    //     foreach (Storage::files(Hero::IMAGE_DIRECTORY) as $image) {
+    //         $updated_at = Storage::lastModified($image);
+    //         yield (object) [
+    //             "url" => asset($image),
+    //             "updated_at" => Carbon::createFromTimestamp($updated_at),
+    //             "changefreq" => "monthly",
+    //         ];
+    //     }
+    // }
 
     private function get_page() {
         $articles = Article::select("id", "updated_at")

@@ -1,12 +1,13 @@
 @extends("layouts.main")
 
 @section("content")
-<div class="d-flex justify-content-between text-left border-bottom pb-2" data-toggle="modal" data-target="#new-article-modal">
+<div class="d-flex justify-content-between text-left border-bottom pb-2">
     <div class="flex-grow">
         <h3 id="page-title">Admin</h3>
     </div>
     <div class="flex-shrink">
-        <button class="btn btn-outline-secondary">Add New</button>
+        <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#new-article-modal">Add New</button>
+        <a class="btn btn-outline-secondary" href="{{ route('assets') }}">Manage Assets</a>
     </div>
 </div>
 <div class="row">

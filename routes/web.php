@@ -5,11 +5,13 @@
   */
 Route::group(["middleware" => ["auth", ]], function() {
     Route::get("admin", "AdminController@index")->name("admin");
+    Route::get("admin/assets", "AdminController@assets")->name("assets");
     Route::get("admin/{id}", "AdminController@show");
     Route::post("admin/{id}", "AdminController@update");
     Route::get("preview/{slug}", "ArticlesController@preview");
     Route::group(["prefix" => "ajax"], function() {
         Route::put("hero/{id}", "HeroController@update");
+        Route::put("assets/{id}", "AssetController@update");
     });
 });
 
@@ -32,6 +34,7 @@ Route::group(["prefix" => "ajax"], function() {
  * Dynamically built images
  */
 Route::group(["prefix" => "images"], function() {
+    Route::get("assets/{article_id}/{filename}", "ImagesController@asset");
     Route::get("heroes/{slug}.{extension}", "ImagesController@hero");
     Route::get("thumbnails/{slug}.{extension}", "ImagesController@thumbnail");
 });

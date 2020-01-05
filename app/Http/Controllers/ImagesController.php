@@ -3,13 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Images\Asset;
 use Illuminate\Http\Request;
+use Storage;
 
 class ImagesController extends Controller
 {
     private $article;
 
-    // private $mime_type;
+    public function asset(string $article_id, string $filename) {
+        $asset = Asset::IMAGE_DIRECTORY . "$article_id/$filename";
+        if (Storage::exists($asset))
+            return response(Storage::get($asset))
+                ->withHeaders(["Content-Type" => Storage::mimetype($asset)]);
+        abort(404);
+    }
 
     public function hero(string $slug, string $extension) {
         $this->set_article($slug);

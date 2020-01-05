@@ -1,9 +1,13 @@
 @extends("layouts.main")
 
 @section("content")
-<div class="text-left border-bottom mb-4 pb-2">
-    <h3 class="page-title">{{ $article->headline }}</h3>
-    <a target="_new" href='{{ url("preview/$article->slug") }}'>{{ url("preview/$article->slug") }}</a>
+<div class="d-flex justify-content-between text-left border-bottom mb-4 pb-2">
+    <div class="flex-grow">
+        <h3 id="page-title">{{ $article->headline }}</h3>
+    </div>
+    <div class="flex-shrink">
+        <a class="btn btn-outline-secondary" target="_new" href='{{ url("preview/$article->slug") }}'>Preview</a>
+    </div>
 </div>
 <div>
     <form method="POST" action="{{ url()->current() }}">

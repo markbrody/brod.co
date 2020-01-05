@@ -28,4 +28,8 @@ class AdminController extends Controller
         $article->save();
         return $this->show($article->id);
     }
+
+    public function assets() {
+        return view("admin.assets", ["articles" => Article::orderBy("headline", "asc")->get()]);
+    }
 }

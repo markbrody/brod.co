@@ -26,15 +26,15 @@
                 </div>
             </div>
             <div id="image-upload-target" class="col-md-6 bg-white rounded" style="z-index:20;">
-                <label for="">Image (recommended 1200x400)</label>
+                <label for="">Image Upload</label>
                 <div style="position:relative;background-color:#fff;border-style:dashed!important" class="text-center mr-4 mb-3 ml-4 pt-3 pb-2 border">
                     <input type="file" name="image" id="hidden-file-input" class="hidden-file-input">
-                    <div id="thumbnail-container" style="position:relative;width:260px;height:65px;margin:auto;cursor:pointer;">
-                        <img style="width:260px;height:65px" class="hero-thumbnail bg-light border" id="image-upload-thumbnail" src="{{ $article->thumbnail_url }}">
+                    <div id="thumbnail-container" style="position:relative;cursor:pointer;" class="w-100">
+                        <img style="width:260px;height:65px" class="d-none" id="image-upload-thumbnail" src="{{ $article->thumbnail_url }}">
                         <div id="image-upload-label" class="image-upload-label" style="display:none">Upload New</div>
                     </div>
                     <div style="width:250px;height:2px;margin:auto" id="progressbar-container" class="progress mt-2 bg-white">
-                        <div id="progress-bar" class="progress-bar bg-success" role="progressbar" style="width:0%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div id="progress-bar" class="progress-bar bg-primary" role="progressbar" style="width:0%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
             </div>
@@ -46,6 +46,7 @@
         <h5>Gallery</h5>
     </div>
 </div>
+<div id="image-gallery" class="row"></div>
 @endsection
 
 @section("scripts")
@@ -64,12 +65,23 @@
     };
     let progress_bar = new ProgressBar(progressbar_options);
 
+    function load_gallery(images) {
+        $("#image-gallery").empty();
+        for (var i=0; i<images.length; i++) {
+            var html = '<div class="col-12 col-md-6 col-xl-4">'
+                     + '<img class="w-100" src="/' + images[i] + '">'
+                     + '</div>';
+            $("#image-gallery").append(html);
+        }
+    }
+
     $("#article-select").on("change", function() {
         upload_url = "{{ url('ajax/assets') }}/" + $(this).val();
         $.ajax_api({
             type: "GET",
             url: "/api/articles/" + $(this).val() + "/assets",
             success: function(response) {
+                load_gallery(response);
             }
         });
         $(this).blur();

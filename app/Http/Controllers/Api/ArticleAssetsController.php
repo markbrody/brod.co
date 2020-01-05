@@ -12,9 +12,9 @@ class ArticleAssetsController extends Controller
 {
     public function index(string $id) {
         $article = Article::findOrFail($id);
-        $image_directory = Asset::IMAGE_DIRECTORY . "$id/";
+        $image_directory = Asset::IMAGE_DIRECTORY . $id;
         if (Storage::exists($image_directory))
-            dd(Storage::files($image_directory));
+            return Storage::files($image_directory);
         return [];
     }
 

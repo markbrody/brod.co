@@ -240,6 +240,13 @@ ul.main-nav-menu li {
     background-color: #f8f9fa;
 }
 
+.article-container img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+}
+
 .article-container > pre {
     color: #efefef;
     background-color: #395570;
@@ -406,6 +413,12 @@ ul.main-nav-menu li {
     }
 }
 */
+
+@media (min-width: 768px) {
+    .article-container img {
+        max-width: 90%;
+    }
+}
 
 @media (min-width: 992px) {
     .left-nav {

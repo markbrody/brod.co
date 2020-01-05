@@ -6,7 +6,7 @@
 Route::group(["middleware" => ["auth", ]], function() {
     Route::get("admin", "AdminController@index")->name("admin");
     Route::get("admin/assets", "AdminController@assets")->name("assets");
-    Route::get("admin/{id}", "AdminController@show");
+    Route::get("admin/{id}", "AdminController@show")->name("edit");
     Route::post("admin/{id}", "AdminController@update");
     Route::get("preview/{slug}", "ArticlesController@preview");
     Route::group(["prefix" => "ajax"], function() {

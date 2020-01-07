@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="description" content="Musings of development, computing, astronomy, and life.">
         <meta property="og:site_name" content="{{ config('app.name') }}">
         @if (isset($open_graph))
         <meta property="og:type" content="article">

@@ -60,19 +60,19 @@
         </div>
     </div>
     <div class="row">
-        @foreach($article->related as $related)
+        @foreach($article->more as $more)
         <div class="col-12 col-md-6 col-xl-4 mb-4">
             <div class="card">
-                @if($related->hero_url)
+                @if($more->hero_url)
                 <div class="w-100 p-1">
-                    <a href="{{ $related->url }}"><img class="w-100 rounded" src="{{ $related->hero_url }}" alt="{{ $related->headline }}"></a>
+                    <a href="{{ $more->url }}"><img class="w-100 rounded" src="{{ $more->hero_url }}" alt="{{ $more->headline }}"></a>
                 </div>
                 @endif
                 <div class="card-body">
                     <div>
-                        {{ $related->headline }}
+                        {{ $more->headline }}
                     </div>
-                    <small class="text-muted">{{ $related->created }}</small>
+                    <small class="text-muted">{{ $more->created }}</small>
                 </div>
             </div>
         </div>

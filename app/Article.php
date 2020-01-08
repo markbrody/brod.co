@@ -61,7 +61,7 @@ class Article extends Model
         return ceil(str_word_count($this->markdown) / 180);
     }
 
-    public function getRelatedAttribute() {
+    public function getMoreAttribute() {
         $related = [];
         foreach ($this->tags as $tag) {
             $tag->articles->each(function($article) use (&$related) {
@@ -74,6 +74,16 @@ class Article extends Model
             });
         }
         arsort($related);
+
+        // $recent = static::select(["id"])
+        //       ->where("is_published", true)
+        //       ->whereNotIn("id", array_keys($related))
+        //       ->orderBy("created_at", "desc")
+        //       ->limit(4)
+        //       ->get()
+        //       ->toArray();
+        // $more = $related + array_flip($recent);
+
         foreach (collect($related)->slice(0, 3) as $article_id => $count)
             if ($article_id !== $this->id)
                 yield static::find($article_id);

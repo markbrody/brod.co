@@ -39,8 +39,8 @@ brod.co
         @yield("page_title")
         @yield("content")
         @if(isset($nav_links))
-        <div class="row border-top my-5">
-            <div class="col-12 text-right py-5">
+        <div class="row border-top">
+            <div class="col-12 text-right pt-5">
                 @if($nav_links->newer)
                 <a class="btn btn-outline-secondary mr-2" href="{{ $nav_links->newer }}">
                 @else

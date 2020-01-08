@@ -47,9 +47,8 @@
             {{ $article->html }}
         </div>
     </div>
-    <hr class="hero-hr my-5">
     <a name="disqus_thread"></a>
-    <div id="disqus_thread"></div>
+    <div id="disqus_thread" class="mt-5"></div>
 </div>
 @endsection
 

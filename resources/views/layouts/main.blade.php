@@ -60,6 +60,7 @@ brod.co
             </div>
         </div>
         @endif
+        @yield("additional")
         <footer class="text-center mt-5">
             <small class="text-muted">Copyright &copy; 2017-{{ date("Y") }} &nbsp; {{ config("app.name") }}</small>
         </footer>

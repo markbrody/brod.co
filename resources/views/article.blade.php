@@ -53,6 +53,35 @@
 </div>
 @endsection
 
+@section("additional")
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h5>More Articles</h5>
+        </div>
+    </div>
+    <div class="row">
+        @foreach($article->related as $related)
+        <div class="col-12 col-md-6 col-xl-4 mb-4">
+            <div class="card">
+                @if($related->hero_url)
+                <div class="w-100 p-1">
+                    <a href="{{ $related->url }}"><img class="w-100 rounded" src="{{ $related->hero_url }}" alt="{{ $related->headline }}"></a>
+                </div>
+                @endif
+                <div class="card-body">
+                    <div>
+                        {{ $related->headline }}
+                    </div>
+                    <small class="text-muted">{{ $related->created }}</small>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
+@endsection
+
 @section("scripts")
 {!! (new App\Disqus($article))->comments() !!}
 @endsection

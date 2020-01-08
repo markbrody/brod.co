@@ -62,29 +62,20 @@ class Article extends Model
     }
 
     public function getMoreAttribute() {
-        $related = [];
+        $more = [];
         foreach ($this->tags as $tag) {
-            $tag->articles->each(function($article) use (&$related) {
+            $tag->articles->each(function($article) use (&$more) {
                 if ($article->is_published) {
-                    if (array_key_exists($article->id, $related))
-                        $related[$article->id]++;
+                    if (array_key_exists($article->id, $more))
+                        $more[$article->id]++;
                     else
-                        $related[$article->id] = 1;
+                        $more[$article->id] = 1;
                 }
             });
         }
-        arsort($related);
+        arsort($more);
 
-        // $recent = static::select(["id"])
-        //       ->where("is_published", true)
-        //       ->whereNotIn("id", array_keys($related))
-        //       ->orderBy("created_at", "desc")
-        //       ->limit(4)
-        //       ->get()
-        //       ->toArray();
-        // $more = $related + array_flip($recent);
-
-        foreach (collect($related)->slice(0, 3) as $article_id => $count)
+        foreach (collect($more)->slice(0, 3) as $article_id => $count)
             if ($article_id !== $this->id)
                 yield static::find($article_id);
     }

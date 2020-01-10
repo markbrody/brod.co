@@ -176,6 +176,12 @@ ul.main-nav-menu li {
     margin-bottom: 0;
 }
 
+.hero {
+    max-height: 400px;
+    object-fit: cover;
+    object-position: 100% 0;
+}
+
 .image-delete-label {
     background-color: #000;
     color: #fff;

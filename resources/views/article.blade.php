@@ -28,7 +28,7 @@
 @if($article->hero_url)
 <div class="jumbotron jumbotron-fluid p-0">
     <div class="container p-0">
-        <img class="img-fluid" src="{{ $article->hero_url }}">
+        <img {!! $article->object_position !!} class="hero w-100 rounded" src="{{ $article->hero_url }}">
     </div>
 </div>
 @endif

@@ -57,6 +57,15 @@ class Article extends Model
         return preg_replace("/\s[^\s]+$/", "", substr($markdown, 0, 512)) . "…";
     }
 
+    public function getObjectPositionAttribute() {
+        if ($this->object_position_id == 1)
+            return 'style="object-position:100% 0"';
+        elseif ($this->object_position_id == 2)
+            return 'style="object-position:100% 100%"';
+        else
+            return 'style="object-position:100% 50%"';
+    }
+
     public function getReadTimeAttribute() {
         return ceil(str_word_count($this->markdown) / 180);
     }

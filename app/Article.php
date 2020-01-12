@@ -137,4 +137,8 @@ class Article extends Model
         return asset("images/placeholder_250x130.jpg");
     }
 
+    public function scopeIsPublished($query) {
+        return $query->where("is_published", true);
+    }
+
 }

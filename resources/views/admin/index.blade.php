@@ -153,22 +153,23 @@
         });
     });
 
-    $(".article-status-icon").on("click", function() {
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: "/ajax/tweet/" + $(this).data("id"),
-            success: function(response) {
-                if (reponse.created_at)
-                    window.location.reload();
-                else
-                    alert("An error occurred.");
-            },
-            error: function(response) {
-                alert(response.responseText || "An error occurred.");
-                console.log(response);
-            },
-        });
+    $(".twitter-status-icon").on("click", function() {
+        if (confirm("Tweet a link to this article?"))
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "/ajax/tweet/" + $(this).data("id"),
+                success: function(response) {
+                    if (reponse.created_at)
+                        window.location.reload();
+                    else
+                        alert("An error occurred.");
+                },
+                error: function(response) {
+                    alert(response.responseText || "An error occurred.");
+                    console.log(response);
+                },
+            });
     });
 </script>
 @endsection

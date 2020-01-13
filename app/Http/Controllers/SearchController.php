@@ -17,7 +17,8 @@ class SearchController extends Controller
     }
 
     private function search_headlines(string $query) {
-        return Article::where("headline", "like", "%$query%")
+        return Article::where("is_published", true)
+            ->where("headline", "like", "%$query%")
             ->orderBy("created_at", "desc")
             ->limit(5)
             ->get();
@@ -26,7 +27,7 @@ class SearchController extends Controller
     private function search_tags(string $query) {
         $tag = Tag::where("name", $query)->first();
         if ($tag)
-            return $tag->articles;
+            return $tag->articles->where("is_published", true);
         return collect([]);
     }
 }

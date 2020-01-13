@@ -147,6 +147,10 @@ ul.main-nav-menu li {
     padding-top: 20px;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 .box-shadow-none {
     outline: none;
     border: none !important;

@@ -9,9 +9,11 @@ Route::group(["middleware" => ["auth", ]], function() {
     Route::get("admin/{id}", "AdminController@show")->name("edit");
     Route::post("admin/{id}", "AdminController@update");
     Route::get("preview/{slug}", "ArticlesController@preview");
+
     Route::group(["prefix" => "ajax"], function() {
-        Route::put("hero/{id}", "HeroController@update");
         Route::put("assets/{id}", "AssetController@update");
+        Route::put("hero/{id}", "HeroController@update");
+        Route::get("tweet/{id}", "TweetController@show");
     });
 });
 
@@ -22,6 +24,7 @@ Route::get("/", "ArticlesController@index")->name("index");
 Route::get("articles", "ArticlesController@index");
 Route::get("articles/{slug}", "ArticlesController@show")->name("articles");
 Route::get("calendar/{year?}/{month?}", "CalendarController@index")->name("calendar");
+Route::get("go/{short_url_id}", "GoController@show")->name("go");
 Route::get("page/{page}", "ArticlesController@index")->name("page");
 Route::get("robots.txt", "RobotsController@index");
 Route::get("sitemap.xml", "SitemapController@index");

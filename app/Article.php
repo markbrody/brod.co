@@ -30,6 +30,18 @@ class Article extends Model
     public static function boot() {
         parent::boot();
         self::saving(function($article) {
+            if (!$article->short_url_number) {
+                $short_url_number = null;
+                do {
+                    $random = rand(95978, 1679615);
+                    if (!preg_match("/[01ilo]/i", self::number_to_id($random))) {
+                        $result = self::withTrashed()->where("short_url_number", $random)->first();
+                        if (empty($result))
+                            $short_url_number = $random;
+                    }
+                } while ($short_url_number === null);
+                $article->short_url_number = $short_url_number;
+            }
             $article->slug = Str::slug($article->headline, "-");
         });
     }
@@ -89,6 +101,10 @@ class Article extends Model
                 yield static::find($article_id);
     }
 
+    public function getShortUrlAttribute() {
+        return route("go", self::number_to_id($this->short_url_number));
+    }
+
     public function getUrlAttribute() {
         return route("articles", $this->slug);
     }
@@ -139,6 +155,18 @@ class Article extends Model
 
     public function scopeIsPublished($query) {
         return $query->where("is_published", true);
+    }
+
+    public static function find_short_url(string $id): ?self {
+        return self::where("short_url_number", self::id_to_number($id))->first();
+    }
+
+    public static function id_to_number(string $id): int {
+        return base_convert($id, 36, 10);
+    }
+
+    public static function number_to_id(int $id): string {
+        return strtolower(base_convert($id, 10, 36));
     }
 
 }

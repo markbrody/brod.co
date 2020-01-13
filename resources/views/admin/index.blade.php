@@ -21,6 +21,14 @@
                         <span style="font-size:1.1rem">{{ $article->headline }}</span>
                         <div class="d-flex">
                             <small class="text-muted mr-auto">by {{$article->user->name }} on {{ $article->created }}</small>
+
+                        @if ($article->is_shared)
+                            <small class="ml-1 mdi mdi-twitter" data-toggle="tooltip" data-placement="top" title="Already Shared"></small>
+                        @else
+                            <small class="twitter-status-icon cursor-pointer ml-1 mdi mdi-twitter text-primary"
+                                data-id="{{ $article->id }}" data-toggle="tooltip" data-placement="top" title="Tweet This"></small>
+                        @endif
+
                         @if ($article->is_published)
                             <small class="article-status-icon cursor-pointer ml-1 mdi mdi-earth text-primary"
                                 data-id="{{ $article->id }}" data-name="is_published" data-value="{{ (int) $article->is_published }}"
@@ -30,6 +38,7 @@
                                 data-id="{{ $article->id }}" data-name="is_published" data-value="{{ (int) $article->published }}"
                                 data-toggle="tooltip" data-placement="top" title="Unpublished"></small>
                         @endif
+
                         </div>
                         <hr>
                         {{-- <span style="font-size:.9rem" class="my-2">{{ preg_replace("/^[\W]+/S", "", $article->description) }}</span> --}}
@@ -140,6 +149,24 @@
             },
             success: function(response) {
                 window.location.reload();
+            },
+        });
+    });
+
+    $(".article-status-icon").on("click", function() {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "/ajax/tweet/" + $(this).data("id"),
+            success: function(response) {
+                if (reponse.created_at)
+                    window.location.reload();
+                else
+                    alert("An error occurred.");
+            },
+            error: function(response) {
+                alert(response.responseText || "An error occurred.");
+                console.log(response);
             },
         });
     });

@@ -77,6 +77,15 @@ class SitemapController extends Controller
             ];
     }
 
+    private function get_go() {
+        foreach (Article::where("is_published", 1)->get() as $article)
+            yield (object) [
+                "url" => $article->short_url,
+                "updated_at" => $article->updated_at,
+                "changefreq" => "weekly",
+            ];
+    }
+
     /**
      * This involves looking up corresponding articles and inefficient
      */

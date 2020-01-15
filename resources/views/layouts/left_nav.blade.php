@@ -3,7 +3,7 @@
         <a href="{{ url('/') }}" ><img class="w-50 mt-3" src="{{ asset('images/logo.svg') }}" alt="Brod.co"></a>
         <img class="profile rounded-circle my-3" src="{{ asset('images/markbrody.png') }}" alt="Mark Brody">
         <h5>Mark Brody</h5>
-        <p class="text-muted px-5">Musings of development, computing, astronomy, and life.</p>
+        <p class="text-muted px-5">A reference to things that I may or may not remember later</p>
         <ul class="list-inline py-3 mx-auto">
             <li class="list-inline-item"><a target="_new" href="https://instagram.com/astro_nola"><span class="mdi mdi-instagram"></span></a></li>
             <li class="list-inline-item"><a target="_new" href="https://twitter.com/_markbrody"><span class="mdi mdi-twitter"></span></a></li>

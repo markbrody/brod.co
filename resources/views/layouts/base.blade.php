@@ -4,20 +4,20 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="description" content="Musings of development, computing, astronomy, and life.">
+        <meta name="description" content="A reference to things that I may or may not remember later">
         <meta property="og:site_name" content="{{ config('app.name') }}">
         @if (isset($open_graph))
         <meta property="og:type" content="article">
         <meta property="og:title" content="{{ $open_graph->title ?? config('app.name') }}">
         <meta property="og:url" content="{{ $open_graph->url ?? url('') }}">
         <meta property="og:image" content="{{ $open_graph->image ?? asset('/images/og-wide.png') }}">
-        <meta property="og:description" content="{{ $open_graph->description ?? 'Musings of development, computing, astronomy, and life.' }}">
+        <meta property="og:description" content="{{ $open_graph->description ?? 'A reference to things that I may or may not remember later' }}">
         @else
         <meta property="og:type" content="website">
         <meta property="og:title" content="{{ config('app.name') }}">
         <meta property="og:url" content="{{ url('') }}">
         <meta property="og:image" content="{{ asset('/images/og-wide.png') }}">
-        <meta property="og:description" content="Musings of development, computing, astronomy, and life.">
+        <meta property="og:description" content="A reference to things that I may or may not remember later">
         @endif
         <title>@yield("title", config("app.name"))</title>
         <link href="https://fonts.googleapis.com/css?family=Orbitron|Lato&display=swap" rel="stylesheet">

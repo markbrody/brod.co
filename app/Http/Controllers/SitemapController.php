@@ -99,6 +99,9 @@ class SitemapController extends Controller
     //         ];
     //     }
     // }
+    private function get_images() {
+        return [];
+    }
 
     private function get_page() {
         $articles = Article::select("id", "updated_at")

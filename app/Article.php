@@ -147,7 +147,7 @@ class Article extends Model
     }
 
     /**
-     * Scopes
+     * Query scopes
      */
     public function scopeIsPublished($query) {
         return $query->where("is_published", true);

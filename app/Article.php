@@ -46,6 +46,9 @@ class Article extends Model
         });
     }
 
+    /**
+     * Relationships
+     */
     public function tags() {
         return $this->belongsToMany("App\Tag");
     }
@@ -54,32 +57,40 @@ class Article extends Model
         return $this->belongsTo("App\User");
     }
 
+    /**
+     * Mutators
+     */
     public function getCreatedAttribute() {
         return Carbon::createFromTimeStamp(strtotime($this->created_at))->toFormattedDateString();
     }
 
-    public function getHtmlAttribute() {
-        return new HtmlString((new Markdown)->html($this->markdown));
-    }
-
     public function getDescriptionAttribute() {
+        // Remove article headers
         $markdown = preg_replace("/^#.+$/m", "", $this->markdown);
+        // Remove inline code block syntax but preserve the content
         $markdown = preg_replace("/( _)([^_]+)(_ )/", " $2 ", $markdown);
+        // Remove any non-word boundary at the beginning of a line (hr, ul, etc)
         $markdown = preg_replace("/^[\W]+/m", "", $markdown);
+
+        // Truncate length to 512 and remove the last (likely incomplete) word
         return preg_replace("/\s[^\s]+$/", "", substr($markdown, 0, 512)) . "…";
     }
 
-    public function getObjectPositionAttribute() {
-        if ($this->object_position_id == 1)
-            return 'style="object-position:100% 0"';
-        elseif ($this->object_position_id == 2)
-            return 'style="object-position:100% 100%"';
-        else
-            return 'style="object-position:100% 50%"';
+    public function getHeroPathAttribute() {
+        if (Storage::exists(Hero::IMAGE_DIRECTORY . $this->id))
+            return Storage::path(Hero::IMAGE_DIRECTORY . $this->id);
+        return null;
     }
 
-    public function getReadTimeAttribute() {
-        return ceil(str_word_count($this->markdown) / 180);
+    public function getHeroUrlAttribute() {
+        if (Storage::exists(Hero::IMAGE_DIRECTORY . $this->id))
+            return url(Hero::IMAGE_DIRECTORY . $this->slug . "."
+                . $this->get_hero_extension());
+        return null;
+    }
+
+    public function getHtmlAttribute() {
+        return new HtmlString((new Markdown)->html($this->markdown));
     }
 
     public function getMoreAttribute() {
@@ -101,43 +112,21 @@ class Article extends Model
                 yield static::find($article_id);
     }
 
+    public function getObjectPositionAttribute() {
+        if ($this->object_position_id == 1)
+            return 'style="object-position:100% 0"';
+        elseif ($this->object_position_id == 2)
+            return 'style="object-position:100% 100%"';
+        else
+            return 'style="object-position:100% 50%"';
+    }
+
+    public function getReadTimeAttribute() {
+        return ceil(str_word_count($this->markdown) / 180);
+    }
+
     public function getShortUrlAttribute() {
         return route("go", self::number_to_id($this->short_url_number));
-    }
-
-    public function getUrlAttribute() {
-        return route("articles", $this->slug);
-    }
-
-    private function get_hero_extension() {
-        if (Storage::exists(Hero::IMAGE_DIRECTORY . $this->id)) {
-            $filename = Storage::path(Hero::IMAGE_DIRECTORY . $this->id);
-            preg_match("/^image\/(\w+)$/", mime_content_type($filename), $match);
-            return $match[1];
-        }
-        return null;
-    }
-
-    public function getHeroPathAttribute() {
-        if (Storage::exists(Hero::IMAGE_DIRECTORY . $this->id))
-            return Storage::path(Hero::IMAGE_DIRECTORY . $this->id);
-        return null;
-    }
-
-    public function getHeroUrlAttribute() {
-        if (Storage::exists(Hero::IMAGE_DIRECTORY . $this->id))
-            return url(Hero::IMAGE_DIRECTORY . $this->slug . "."
-                . $this->get_hero_extension());
-        return null;
-    }
-
-    private function get_thumbnail_extension() {
-        if (Storage::exists(Hero::THUMBNAIL_DIRECTORY . "/$this->id")) {
-            $filename = Storage::path(Hero::THUMBNAIL_DIRECTORY . $this->id);
-            preg_match("/^image\/(\w+)$/", mime_content_type($filename), $match);
-            return $match[1];
-        }
-        return null;
     }
 
     public function getThumbnailPathAttribute() {
@@ -153,10 +142,41 @@ class Article extends Model
         return asset("images/placeholder_250x130.jpg");
     }
 
+    public function getUrlAttribute() {
+        return route("articles", $this->slug);
+    }
+
+    /**
+     * Scopes
+     */
     public function scopeIsPublished($query) {
         return $query->where("is_published", true);
     }
 
+    /**
+     * Private methods
+     */
+    private function get_hero_extension() {
+        if (Storage::exists(Hero::IMAGE_DIRECTORY . $this->id)) {
+            $filename = Storage::path(Hero::IMAGE_DIRECTORY . $this->id);
+            preg_match("/^image\/(\w+)$/", mime_content_type($filename), $match);
+            return $match[1];
+        }
+        return null;
+    }
+
+    private function get_thumbnail_extension() {
+        if (Storage::exists(Hero::THUMBNAIL_DIRECTORY . "/$this->id")) {
+            $filename = Storage::path(Hero::THUMBNAIL_DIRECTORY . $this->id);
+            preg_match("/^image\/(\w+)$/", mime_content_type($filename), $match);
+            return $match[1];
+        }
+        return null;
+    }
+
+    /**
+     * Static methods
+     */
     public static function find_short_url(string $id): ?self {
         return self::where("short_url_number", self::id_to_number($id))->first();
     }

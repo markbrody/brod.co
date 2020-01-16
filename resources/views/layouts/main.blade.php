@@ -29,7 +29,7 @@
 @endsection
 
 @section("title")
-brod.co
+{{ config("app.name") }}
 @endsection
 
 @section("template")

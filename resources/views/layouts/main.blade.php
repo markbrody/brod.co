@@ -28,10 +28,6 @@
 <meta name="theme-color" content="#ffffff">
 @endsection
 
-@section("title")
-{{ config("app.name") }}
-@endsection
-
 @section("template")
 <div class="main-container container-fluid pb-4">
     <div class="container">

@@ -39,7 +39,7 @@ class SitemapController extends Controller
                 foreach ($this->{$method}() as $page) {
                     $urls[] = (object) [
                         "loc" => $page->url,
-                        "lastmod" => $page->updated_at->format(DateTime::ISO8601),
+                        "lastmod" => $page->updated_at->format("Y-m-d\TH:i:sP"),
                         "changefreq" => $page->changefreq,
                         "priority" => 0.8,
                     ];
@@ -138,7 +138,7 @@ class SitemapController extends Controller
             $mtime = Carbon::createFromTimestamp(filemtime($filename));
         else
             $mtime = (new Carbon("first day of this month"))->startOfDay();
-        return $mtime->format(DateTime::ISO8601);
+        return $mtime->format("Y-m-d\TH:i:sP");
     }
 
 }

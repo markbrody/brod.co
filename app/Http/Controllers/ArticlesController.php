@@ -14,10 +14,14 @@ class ArticlesController extends Controller
                            ->paginate(5, ["*"], "page/$page", $page);
         $nav_links = $this->index_links($articles);
 
-        return view("index", [
+        $data = [
             "articles" => $articles,
             "nav_links" => $nav_links,
-        ]);
+        ];
+        if ($page == 1)
+            $data['canonical'] = route("index");
+
+        return view("index", $data);
     }
 
     public function show(string $slug, $is_published=true) {

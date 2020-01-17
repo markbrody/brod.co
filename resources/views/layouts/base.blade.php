@@ -20,6 +20,7 @@
         <meta property="og:description" content="A reference to things that I may or may not remember later">
         @endif
         <title>@yield("title", config("app.name"))</title>
+        <link rel="canonical" href="{{ $canonical ?? url()->current() }}" />
         <link href="https://fonts.googleapis.com/css?family=Orbitron|Lato&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/materialdesignicons.min.css') }}">

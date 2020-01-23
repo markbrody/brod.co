@@ -6,6 +6,16 @@ body {
     color: #000;
 }
 
+::-moz-selection {
+    color: #fff;
+    background-color: #395570;
+}
+
+::selection {
+    color: #fff;
+    background-color: #395570;
+}
+
 /**
  * Guest styles
  */

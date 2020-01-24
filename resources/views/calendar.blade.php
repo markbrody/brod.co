@@ -2,7 +2,7 @@
 
 @section("head")
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
+<link rel="stylesheet" href="{{ asset('css/calendar.css') }}?{{ time() }}">
 <link rel="icon" href="{{ asset('images/calendar/favicon.ico') }}" sizes="16x16 32x32 48x48 64x64" type="image/vnd.microsoft.icon">
 <link rel="apple-touch-icon-precomposed" href="{{ asset('images/calendar/apple-touch-icon.png' ) }}" />
 @endsection

@@ -25,13 +25,13 @@
     </div>
     <div class="row px-2">
     @foreach($calendar->labels as $label)
-        <div class="col calendar-label border p-0 bg-light text-center">{{ $label }}</div>
+        <div class="col calendar-label border p-0 bg-day text-center">{{ $label }}</div>
     @endforeach
     </div>
     @foreach($calendar->weeks as $week)
     <div class="row px-2">
         @foreach($week as $day)
-        <div class="calendar-day col border p-0 {{ $day->current() ? 'bg-light' : '' }}">
+        <div class="calendar-day col border p-0 {{ $day->current() ? 'bg-day' : '' }}">
             <div class="w-100 text-right mb-2 pr-1 {{ $day->current() ? 'font-weight-bold' : '' }}">{{ $day->day }}</div>
             <div class="progress bg-transparent rounded-0">
             @if($day->custody->status == "arrive")

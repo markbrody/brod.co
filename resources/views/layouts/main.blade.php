@@ -1,6 +1,7 @@
 @extends("layouts.base")
 
 @section("head")
+<link rel="stylesheet" href="{{ asset('css/highlight.css') }}">
 @if (isset($articles))
     @foreach($articles as $prefetch)
     @if($prefetch->hero_url)

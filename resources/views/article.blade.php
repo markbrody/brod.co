@@ -82,5 +82,7 @@
 @endsection
 
 @section("scripts")
+<script src="{{ asset('js/highlight.min.js') }}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 {!! (new App\Disqus($article))->comments() !!}
 @endsection

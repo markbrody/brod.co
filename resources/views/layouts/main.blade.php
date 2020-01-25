@@ -66,12 +66,11 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <span class="mt-2">
-                            This site uses cookies. &nbsp;
-                            By continuing, you agree to its use of cookies. &nbsp;
+                            By using this site, you agree to its use of cookies.
                             <br>
-                            <a href="#">Read more</a>
+                            <a href="{{ route('privacy') }}">Read more</a>
                         </span>
-                        <button id="accept-cookies-button" type="button" class="btn btn-sm btn-outline-secondary ml-2">Accept</button>
+                        <button id="accept-cookies-button" type="button" class="btn btn-sm btn-outline-secondary ml-4">Accept</button>
                     </div>
                 </div>
             </div>

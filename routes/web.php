@@ -26,6 +26,7 @@ Route::get("articles/{slug}", "ArticlesController@show")->name("articles");
 Route::get("calendar/{year?}/{month?}", "CalendarController@index")->name("calendar");
 Route::get("go/{short_url_id}", "GoController@show")->name("go");
 Route::get("page/{page}", "ArticlesController@index")->name("page");
+Route::get("privacy", "PrivacyController@index")->name("privacy");
 Route::get("robots.txt", "RobotsController@index");
 Route::get("sitemap.xml", "SitemapController@index");
 Route::get("tags/{name}", "TagsController@index")->name("tags");

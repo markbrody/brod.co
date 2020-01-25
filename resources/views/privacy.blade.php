@@ -13,7 +13,7 @@
             of the <a href="http://brod.co">brod.co</a> website ("Site"). This privacy
             policy applies to the Site and all products and services offered by brod.co.<br><br>
             
-            <h5>Personal identification information</h5><br><br>
+            <h5>Personal identification information</h5>
             
             We may collect personal identification information from Users in a variety
             of ways, including, but not limited to, when Users visit our site, register
@@ -26,7 +26,7 @@
             identification information, except that it may prevent them from engaging
             in certain Site related activities.<br><br>
             
-            <h5>Non-personal identification information</h5><br><br>
+            <h5>Non-personal identification information</h5>
             
             We may collect non-personal identification information about Users whenever
             they interact with our Site. Non-personal identification information
@@ -34,7 +34,7 @@
             about Users means of connection to our Site, such as the operating system
             and the Internet service providers utilized and other similar information.<br><br>
             
-            <h5>Web browser cookies</h5><br><br>
+            <h5>Web browser cookies</h5>
             
             Our Site may use "cookies" to enhance User experience. User's web browser
             places cookies on their hard drive for record-keeping purposes and sometimes
@@ -42,7 +42,7 @@
             to refuse cookies, or to alert you when cookies are being sent. If they
             do so, note that some parts of the Site may not function properly.<br><br>
             
-            <h5>How we use collected information</h5><br><br>
+            <h5>How we use collected information</h5>
             
             brod.co may collect and use Users personal information for the following
             purposes:<br>
@@ -64,14 +64,14 @@
             instructions at the bottom of each email or User may contact us via
             our Site.</li>
             </ul>
-            <h5>How we protect your information</h5><br><br>
+            <h5>How we protect your information</h5>
             
             We adopt appropriate data collection, storage and processing practices
             and security measures to protect against unauthorized access, alteration,
             disclosure or destruction of your personal information, username, password,
             transaction information and data stored on our Site.<br><br>
             
-            <h5>Sharing your personal information</h5><br><br>
+            <h5>Sharing your personal information</h5>
             
             We do not sell, trade, or rent Users personal identification information
             to others. We may share generic aggregated demographic information not
@@ -83,7 +83,7 @@
             your information with these third parties for those limited purposes
             provided that you have given us your permission.<br><br>
             
-            <h5>Third party websites</h5><br><br>
+            <h5>Third party websites</h5>
             
             Users may find advertising or other content on our Site that link to
             the sites and services of our partners, suppliers, advertisers, sponsors,
@@ -96,7 +96,7 @@
             websites which have a link to our Site, is subject to that website's
             own terms and policies.<br><br>
             
-            <h5>Advertising</h5><br><br>
+            <h5>Advertising</h5>
             
             Ads appearing on our site may be delivered to Users by advertising partners,
             who may set cookies. These cookies allow the ad server to recognize your
@@ -107,7 +107,7 @@
             to you. This privacy policy does not cover the use of cookies by any
             advertisers.<br><br>
             
-            <h5>Google Adsense</h5><br><br>
+            <h5>Google Adsense</h5>
             
             Some of the ads may be served by Google. Google's use of the DART cookie
             enables it to serve ads to Users based on their visit to our Site and
@@ -117,7 +117,7 @@
             DART cookie by visiting the Google ad and content network privacy policy
             at <a href="http://www.google.com/privacy_ads.html">http://www.google.com/privacy_ads.html</a><br><br>
             
-            <h5>Changes to this privacy policy</h5><br><br>
+            <h5>Changes to this privacy policy</h5>
             
             brod.co has the discretion to update this privacy policy at any time.
             When we do, we will revise the updated date at the bottom of this page.
@@ -126,7 +126,7 @@
             we collect. You acknowledge and agree that it is your responsibility
             to review this privacy policy periodically and become aware of modifications.<br><br>
             
-            <h5>Your acceptance of these terms</h5><br><br>
+            <h5>Your acceptance of these terms</h5>
             
             By using this Site, you signify your acceptance of this policy. If you
             do not agree to this policy, please do not use our Site. Your continued

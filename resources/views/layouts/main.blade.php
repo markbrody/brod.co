@@ -61,6 +61,21 @@
         <footer class="text-center mt-5">
             <small class="text-muted">Copyright &copy; 2017-{{ date("Y") }} &nbsp; {{ config("app.name") }}</small>
         </footer>
+        <div id="cookie-container" class="cookie-container" style="display:none">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <span class="mt-2">
+                            This site uses cookies. &nbsp;
+                            By continuing, you agree to its use of cookies. &nbsp;
+                            <br>
+                            <a href="#">Read more</a>
+                        </span>
+                        <button id="accept-cookies-button" type="button" class="btn btn-sm btn-outline-secondary ml-2">Accept</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="search-results" class="list-group search-results rounded shadow" style="display:none"></div>
     <template id="search-result-template">
@@ -80,4 +95,37 @@
 @yield("modal")
 @yield("scripts")
 {!! App\Disqus::counter() !!}
+<script>
+$(document).ready(function() {
+
+    var accepts_cookies = function() {
+        var cookies = decodeURIComponent(document.cookie).split(";");
+        for (var i=0; i<cookies.length; i++) {
+            if (cookies[i].indexOf("_cookies") !== -1)
+                return true;
+        }
+        return false;
+    }
+
+    if (!accepts_cookies()) {
+        setTimeout(function() {
+            $("#cookie-container").fadeIn();
+        }, 1000);
+    }
+
+    $("#accept-cookies-button").on("click", function() {
+        $.ajax({
+            url: "/ajax/cookies",
+            type: "GET",
+            dataType: "json",
+            success: function(response) {
+                $("#cookie-container").fadeOut();
+            },
+            error: function() {
+                alert("An error occurred.");
+            },
+        });
+    });
+});
+</script>
 @endsection

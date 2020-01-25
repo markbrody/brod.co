@@ -31,8 +31,10 @@ Route::get("sitemap.xml", "SitemapController@index");
 Route::get("tags/{name}", "TagsController@index")->name("tags");
 
 Route::group(["prefix" => "ajax"], function() {
+    Route::get("cookies", "CookiesController@index");
     Route::get("search", "SearchController@index");
 });
+
 /**
  * Dynamically built images
  */

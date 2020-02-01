@@ -68,7 +68,7 @@
                         <span class="mt-2">
                             By using this site, you agree to its use of cookies.
                             <br>
-                            <a href="{{ route('privacy') }}">Read more</a>
+                            <a href="{{ route('privacy') }}">Privacy Policy</a>
                         </span>
                         <button id="accept-cookies-button" type="button" class="btn btn-sm btn-outline-secondary ml-4">Accept</button>
                     </div>

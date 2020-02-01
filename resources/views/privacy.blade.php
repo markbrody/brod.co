@@ -109,12 +109,12 @@
             
             <h5>Google Adsense</h5>
             
-            Some of the ads may be served by Google. Google's use of the DART cookie
-            enables it to serve ads to Users based on their visit to our Site and
-            other sites on the Internet. DART uses "non personally identifiable information"
+            Some of the ads may be served by Google. Google's use of the cookies
+            enables them to serve ads to Users based on their visit to our Site and
+            other sites on the Internet. They use "non personally identifiable information"
             and does NOT track personal information about you, such as your name,
-            email address, physical address, etc. You may opt out of the use of the
-            DART cookie by visiting the Google ad and content network privacy policy
+            email address, physical address, etc. You may opt out of the use of their
+            cookies by visiting the Google ad and content network privacy policy
             at <a href="http://www.google.com/privacy_ads.html">http://www.google.com/privacy_ads.html</a><br><br>
             
             <h5>Changes to this privacy policy</h5>

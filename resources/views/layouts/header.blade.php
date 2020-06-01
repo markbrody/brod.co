@@ -14,10 +14,10 @@
         <ul class="main-nav-menu mx-0">
             <li>Projects Directory:</li>
             <li><a href="{{ url('/') }}">/home</a></li>
-            <li><a target="_blank" href="https://asciify.me">/ascii-art</a></li>
-            <li><a target="_blank" href="https://googlyizer.com">/googly-eyes</a></li>
-            <li><a target="_blank" href="https://simpledns.net">/managed-dns</a></li>
-            <li><a target="_blank" href="https://sudoku.brod.co">/sudoku</a></li>
+            <li><a rel="noopener" target="_blank" href="https://asciify.me">/ascii-art</a></li>
+            <li><a rel="noopener" target="_blank" href="https://googlyizer.com">/googly-eyes</a></li>
+            <li><a rel="noopener" target="_blank" href="https://simpledns.net">/managed-dns</a></li>
+            <li><a rel="noopener" target="_blank" href="https://sudoku.brod.co">/sudoku</a></li>
         </ul>
     </div>
     <div class="main-nav-component d-none d-lg-block flex-shrink">
